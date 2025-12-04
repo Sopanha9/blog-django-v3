@@ -1,0 +1,62 @@
+/* Custom Django Admin Styles */
+
+/* Change header color */
+#header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+#branding h1 {
+    color: white;
+}
+
+#header a:link,
+#header a:visited {
+    color: white;
+}
+
+/* Change button colors */
+.button, input[type=submit], input[type=button], .submit-row input, button {
+    background: #667eea;
+    border: none;
+}
+
+.button:hover, input[type=submit]:hover, input[type=button]:hover, .submit-row input:hover {
+    background: #5568d3;
+}
+
+/* Links color */
+a:link, a:visited {
+    color: #667eea;
+}
+
+a:hover {
+    color: #764ba2;
+}
+
+/* Module headers */
+.module h2, .module caption, .inline-group h2 {
+    background: #667eea;
+}
+
+/* Change list filters */
+#changelist-filter li.selected a {
+    color: #667eea;
+    border-left: 5px solid #667eea;
+}
+
+/* Customize breadcrumbs */
+div.breadcrumbs {
+    background: #f8f9fa;
+    color: #333;
+}
+
+/* Style the sidebar */
+.selector {
+    border: 1px solid #667eea;
+}
+
+/* Custom logo/branding */
+#branding h1:before {
+    content: "📝 ";
+}

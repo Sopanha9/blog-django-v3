@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html lang="km" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ post.title }} | 4\null Freelancer</title>
+
+  <!-- Khmer Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&family=Battambang:wght@700;900&display=swap" rel="stylesheet">
+
+  <style>
+  /* === CLEAN & BEAUTIFUL CKEDITOR OUTPUT FOR DARK THEME === */
+  .ck-content {
+    line-height: 1.8;
+    font-size: 1.1rem;
+  }
+  .ck-content h1, .ck-content h2, .ck-content h3, .ck-content h4 {
+    @apply font-bold font-battambang text-cyan-300 mt-10 mb-6;
+  }
+  .ck-content h1 { @apply text-4xl; }
+  .ck-content h2 { @apply text-3xl; }
+  .ck-content h3 { @apply text-2xl; }
+  .ck-content h4 { @apply text-xl; }
+
+  .ck-content p {
+    @apply text-gray-200 mb-6 leading-relaxed;
+  }
+  .ck-content strong, .ck-content b {
+    @apply text-white font-bold;
+  }
+  .ck-content a {
+    @apply text-cyan-400 hover:text-cyan-300 underline transition;
+  }
+  .ck-content ul, .ck-content ol {
+    @apply my-6 pl-8 space-y-3;
+  }
+  .ck-content ul li {
+    @apply list-disc text-gray-200;
+  }
+  .ck-content ol li {
+    @apply list-decimal text-gray-200;
+  }
+  .ck-content blockquote {
+    @apply border-l-4 border-cyan-500 pl-6 py-4 my-8 italic text-gray-300 bg-white/5 rounded-r-xl;
+  }
+  .ck-content img {
+    @apply max-w-full h-auto rounded-xl my-8 shadow-2xl;
+  }
+  .ck-content pre, .ck-content code {
+    @apply bg-black/50 rounded-lg p-4 overflow-x-auto text-cyan-300 font-mono text-sm;
+  }
+  .ck-content table {
+    @apply w-full border-collapse my-8;
+  }
+  .ck-content table th, .ck-content table td {
+    @apply border border-white/20 px-4 py-3 text-left;
+  }
+  .ck-content table th {
+    @apply bg-white/10 text-cyan-300;
+  }
+</style>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            kantumruy: ['Kantumruy Pro', 'sans-serif'],
+            battambang: ['Battambang', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-900 via-zinc-900 to-black text-white">
+
+  <!-- Fixed Glass Navbar -->
+  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/40 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+      <a href="/" class="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent font-battambang">
+        4\null Freelancer
+      </a>
+      <div class="flex space-x-10 font-kantumruy text-gray-300">
+        <a href="/" class="hover:text-white transition">ទំព័រដើម</a>
+        <a href="{% url 'blog_list' %}" class="text-cyan-400 font-semibold">ប្លក់</a>
+        <a href="#" class="hover:text-white transition">គម្រោង</a>
+        <a href="#" class="hover:text-white transition">ទំនាក់ទំនង</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <article class="pt-32 pb-20 px-6">
+    <div class="max-w-4xl mx-auto">
+
+      <!-- Back Link -->
+      <a href="{% url 'blog_list' %}" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition font-kantumruy mb-10 group">
+        ← ត្រឡប់ទៅបញ្ជីអត្ថបទ
+      </a>
+
+      <!-- Post Header -->
+      <header class="mb-12">
+        <h1 class="text-4xl md:text-6xl font-extrabold font-battambang leading-tight bg-gradient-to-r from-white to-cyan-300 bg-clip-text text-transparent">
+          {{ post.title }}
+        </h1>
+
+        <div class="flex flex-wrap items-center gap-4 mt-6 text-gray-400 font-kantumruy text-sm">
+          <span class="flex items-center gap-2">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg>
+            {{ post.author.get_full_name|default:"4\null" }}
+          </span>
+          <span>•</span>
+          <span class="flex items-center gap-2">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h.01a1 1 0 100-2H6zm2 0a1 1 0 011-1h2a1 1 0 110 sensorial 2H9a1 1 0 01-1-1zm-1 4a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/></svg>
+            {{ post.date_created|date:"d/m/Y" }}
+          </span>
+          {% if post.date_updated != post.date_created %}
+            <span>• កែប្រែថ្ងៃទី {{ post.date_updated|date:"d/m/Y" }}</span>
+          {% endif %}
+        </div>
+      </header>
+
+      <!-- Featured Image -->
+      {% if post.featured_image %}
+        <div class="my-12 -mx-6 md:mx-0 rounded-2xl overflow-hidden shadow-2xl">
+          <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="w-full h-auto max-h-96 object-cover" />
+        </div>
+      {% endif %}
+
+      <!-- Post Content (from CKEditor) -->
+      <!-- <div class="prose prose-invert prose-lg max-w-none font-kantumruy leading-relaxed text-gray-200">
+        {{ post.content|safe }}
+      </div> -->
+      
+      <div class="ck-content font-kantumruy text-gray-200 leading-relaxed">
+  {{ post.content|safe }}
+</div>
+
+      <!-- Comments Section -->
+      <section class="mt-20 pt-10 border-t border-white/10">
+        <h2 class="text-3xl font-bold font-battambang mb-10 text-cyan-400">
+          មតិយោបល់ ({{ comments.count }})
+        </h2>
+
+        <!-- Messages (success/error) -->
+      {% if messages %}
+  <div class="mb-8 space-y-3">
+    {% for message in messages %}
+      <div class="
+        p-4 rounded-xl font-kantumruy border
+        {% if message.tags == 'success' %}
+          bg-green-900/30 border-green-500/50 text-green-300
+        {% elif message.tags == 'error' %}
+          bg-red-900/30 border-red-500/50 text-red-300
+        {% else %}
+          bg-cyan-900/30 border-cyan-500/50 text-cyan-300
+        {% endif %}
+      ">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+        <!-- Comment List -->
+        {% if comments %}
+          <div class="space-y-6">
+            {% for comment in comments %}
+              <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-cyan-500/30 transition">
+                <div class="flex items-center justify-between mb-3">
+                  <h4 class="font-bold text-lg font-kantumruy text-cyan-300">{{ comment.name }}</h4>
+                  <span class="text-sm text-gray-500">{{ comment.date_created|date:"d/m/Y H:i" }}</span>
+                </div>
+                <p class="text-gray-300 font-kantumruy leading-relaxed">{{ comment.content|linebreaks }}</p>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <p class="text-center text-gray-500 py-12 text-xl font-kantumruy italic">
+            មិនទាន់មានមតិយោបល់ណាមួយទេ។ សូមធ្វើជាអ្នកដំបូង!
+          </p>
+        {% endif %}
+
+        <!-- Comment Form -->
+        <div class="mt-12 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8">
+          <h3 class="text-2xl font-bold font-battambang mb-8 text-white">សរសេរមតិយោបល់</h3>
+          <form method="post" class="space-y-6 font-kantumruy">
+            {% csrf_token %}
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-semibold mb-2 text-cyan-300">ឈ្មោះ *</label>
+                <input type="text" name="name" required class="w-full px-5 py-3 bg-white/10 border border-white/20 rounded-xl focus:border-cyan-500 focus:outline-none transition" placeholder="ឈ្មោះរបស់អ្នក" />
+              </div>
+              <div>
+                <label class="block text-sm font-semibold mb-2 text-cyan-300">អ៊ីមែល *</label>
+                <input type="email" name="email" required class="w-full px-5 py-3 bg-white/10 border border-white/20 rounded-xl focus:border-cyan-500 focus:outline-none transition" placeholder="email@example.com" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold mb-2 text-cyan-300">មតិយោបល់ *</label>
+              <textarea name="content" rows="5" required class="w-full px-5 py-3 bg-white/10 border border-white/20 rounded-xl focus:border-cyan-500 focus:outline-none transition resize-none" placeholder="ចែករំលែកគំនិតរបស់អ្នក..."></textarea>
+            </div>
+            <button type="submit" class="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 rounded-full font-bold shadow-lg hover:shadow-cyan-500/50 transition transform hover:scale-105">
+              បញ្ជូនមតិយោបល់
+            </button>
+          </form>
+        </div>
+      </section>
+
+    </div>
+  </article>
+
+  <!-- Footer -->
+  <footer class="py-10 text-center text-gray-500 font-kantumruy text-sm border-t border-white/10">
+    © 2025 4\null Freelancer • បង្កើតដោយ ❤️ និងកាហ្វេជាច្រើន
+  </footer>
+
+</body>
+</html>

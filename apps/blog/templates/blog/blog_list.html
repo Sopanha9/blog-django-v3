@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="km" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ប្លក់ - អត្ថបទទាំងអស់ | 4\null Freelancer</title>
+
+  <!-- Khmer Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&family=Battambang:wght@700;900&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            kantumruy: ['Kantumruy Pro', 'sans-serif'],
+            battambang: ['Battambang', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-gray-900 via-zinc-900 to-black text-white">
+
+  <!-- Fixed Glass Navbar (same as homepage) -->
+  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/40 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+      <a href="/" class="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent font-battambang">
+        4\null Freelancer
+      </a>
+      <div class="flex space-x-10 font-kantumruy text-gray-300">
+        <a href="/" class="hover:text-white transition">ទំព័រដើម</a>
+        <a href="/blog/" class="text-cyan-400 font-semibold">ប្លក់</a>
+        <a href="#" class="hover:text-white transition">គម្រោង</a>
+        <a href="#" class="hover:text-white transition">ទំនាក់ទំនង</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Blog Posts Page Content -->
+  <section class="pt-32 pb-20 px-6">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="text-center mb-16">
+        <h1 class="text-5xl md:text-7xl font-extrabold font-battambang bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+          ប្លក់របស់យើង
+        </h1>
+        <p class="mt-6 text-xl text-gray-400 font-kantumruy">
+          ចែករំលែកចំណេះដឹង បច្ចេកទេស និងបទពិសោធន៍ផ្ទាល់
+        </p>
+      </div>
+
+      <!-- Posts Grid -->
+      {% if posts %}
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          {% for post in posts %}
+            <article class="group bg-white/5 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 hover:border-cyan-500/50 transition-all duration-500 hover:-translate-y-3 shadow-xl">
+              <a href="{% url 'blog_detail' post.slug %}">
+                
+                <!-- Featured Image -->
+                {% if post.featured_image %}
+                  <div class="overflow-hidden">
+                    <img src="{{ post.featured_image.url }}" 
+                         alt="{{ post.title }}" 
+                         class="w-full h-64 object-cover group-hover:scale-110 transition duration-700" />
+                  </div>
+                {% else %}
+                  <div class="bg-gradient-to-br from-cyan-900/50 to-blue-900/50 h-64 flex items-center justify-center">
+                    <span class="text-6xl opacity-30">Article</span>
+                  </div>
+                {% endif %}
+
+                <!-- Content -->
+                <div class="p-8">
+                  <h2 class="text-2xl md:text-3xl font-bold font-battambang text-white group-hover:text-cyan-400 transition line-clamp-2">
+                    {{ post.title }}
+                  </h2>
+
+                  <div class="flex items-center gap-4 mt-4 text-sm text-gray-400 font-kantumruy">
+                    <span>{{ post.author.get_full_name|default:"4\null" }}</span>
+                    <span>•</span>
+                    <span>{{ post.date_created|date:"d/m/Y" }}</span>
+                  </div>
+
+                  <p class="mt-5 text-gray-300 font-kantumruy line-clamp-3 leading-relaxed">
+                    {{ post.content|striptags|truncatewords:35 }}
+                  </p>
+
+                  <div class="mt-6 flex items-center text-cyan-400 font-bold font-kantumruy group-hover:translate-x-2 transition">
+                    អានបន្ត <span class="ml-2">→</span>
+                  </div>
+                </div>
+              </a>
+            </article>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="text-center py-20">
+          <p class="text-3xl text-gray-500 font-kantumruy">មិនទាន់មានអត្ថបទនៅឡើយទេ...</p>
+          <p class="mt-4 text-gray-600">តាមដានប្លក់នេះឱ្យបានទៀងទាត់!</p>
+        </div>
+      {% endif %}
+
+    </div>
+  </section>
+
+  <!-- Footer (optional) -->
+  <footer class="py-10 text-center text-gray-500 font-kantumruy text-sm border-t border-white/10">
+    © 2025 4\null Freelancer • បង្កើតដោយ ❤️ និងកាហ្វេជាច្រើន
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+# Python
+*.py[cod]
+*$py.class
+*.so
+__pycache__/
+*.egg
+*.egg-info/
+dist/
+build/
+*.pyc
+*.pyo
+
+# Django
+*.log
+# db.sqlite3 - commented out to keep database in git
+# db.sqlite3-journal
+# /media - commented out to keep uploaded files in git
+/staticfiles
+/static
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment variables
+.env
+.env.local
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
+# Pytest
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# celery
+celerybeat-schedule
+celerybeat.pid
+
+# Migrations (optional - uncomment if you don't want to track migrations)
+# */migrations/*.py
+# !*/migrations/__init__.py

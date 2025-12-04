@@ -1,0 +1,192 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="km">
+  <!-- better for Khmer -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4\null Freelancer - អ្នកជំនាញឯករាជ្យលេខ១</title>
+
+    <!-- Google Fonts - Only real Khmer fonts + one nice Latin -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Battambang:wght@300;400;700;900&family=Kantumruy+Pro:wght@300;400;500;700&family=Khmer:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // FIXED THE TYPO HERE ← this was the main bug!
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              khmer: ["Khmer", "sans-serif"],
+              ktr: ["Kantumruy Pro", "sans-serif"],
+              btb: ["Battambang", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+
+  <body
+    class="min-h-screen bg-gradient-to-br from-gray-900 via-zinc-900 to-black"
+  >
+    <!-- Dark Glass Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50">
+      <div class="max-w-7xl mx-auto px-6 py-5">
+        <div
+          class="backdrop-blur-xl bg-black/40 border border-white/10 rounded-2xl shadow-2xl"
+        >
+          <div class="flex justify-between items-center px-8 py-5">
+            <!-- Logo - Now supports Khmer perfectly -->
+            <a
+              href="#"
+              class="text-4xl font-extrabold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent drop-shadow-lg font-khmer"
+            >
+              4\null Freelancer
+            </a>
+
+            <div class="flex space-x-10 text-lg font-btb">
+              <a
+                href="#"
+                class="text-gray-200 hover:text-white transition hover:scale-110 font-ktr"
+                >ទំព័រដើម</a
+              >
+              <a
+                href="#"
+                class="text-gray-200 hover:text-white transition hover:scale-110 font-ktr"
+                >អំពីយើង</a
+              >
+              <a
+                href="/blog/"
+                class="text-gray-200 hover:text-white transition hover:scale-110 font-ktr"
+                >ប្លក់</a
+              >
+              <a
+                href="#"
+                class="text-gray-200 hover:text-white transition hover:scale-110 font-ktr"
+                >ទំនាក់ទំនង</a
+              >
+            </div>
+
+            <a
+              href="#"
+              class="px-8 py-3 bg-cyan-500/20 border border-cyan-400/40 rounded-full text-cyan-300 font-bold hover:bg-cyan-500/30 hover:text-white transition font-ktr"
+            >
+              ចាប់ផ្តើមឥឡូវ
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="mt-12 flex items-center justify-center px-6 pt-20">
+      <div class="text-center max-w-5xl">
+        <p class="text-cyan-400 text-lg mb-4 font-ktr tracking-widest">
+          សួស្តី! We're 4\null
+        </p>
+
+        <h1
+          class="text-5xl md:text-7xl font-extrabold leading-tight font-btb text-white"
+        >
+          ពួកយើងជា <br />
+          <span class="text-cyan-400">Full Stack Developer</span><br />
+          This is our <span class="text-cyan-400">Portfolio</span>
+        </h1>
+
+        <!-- Avatar (replace with your image URL) -->
+        <div class="mt-12 flex justify-center">
+          <img
+            src="{% static 'main/logo.jpg' %}"
+            alt="Avatar"
+            class="w-64 h-64 rounded-full border-4 border-cyan-500/30 shadow-2xl"
+          />
+        </div>
+
+        <!-- Buttons -->
+        <div class="mt-12 flex flex-col sm:flex-row gap-6 justify-center">
+          <a
+            href="#"
+            class="px-8 py-4 bg-cyan-500/20 border border-cyan-400/50 rounded-full hover:bg-cyan-500/30 transition font-ktr font-bold"
+          >
+            ទាញយក CV
+          </a>
+          <a
+            href="#"
+            class="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-full hover:bg-white/20 transition font-ktr font-bold"
+          >
+            បន្ថែមអំពីពួកយើង
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="py-20 px-6">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-4xl font-bold text-center mb-16 font-battambang text-white font-btb">
+        អត្ថបទថ្មីៗរបស់ពួកយើង
+      </h2>
+
+      {% if posts%}
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <!-- Repeat this card for each project -->
+        {% for post in posts|slice:":3" %}
+            <article class="group bg-white/5 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 hover:border-cyan-500/50 transition-all duration-500 hover:-translate-y-3 shadow-xl">
+              <a href="{% url 'blog_detail' post.slug %}">
+                
+                <!-- Featured Image -->
+                {% if post.featured_image %}
+                  <div class="overflow-hidden">
+                    <img src="{{ post.featured_image.url }}" 
+                         alt="{{ post.title }}" 
+                         class="w-full h-64 object-cover group-hover:scale-110 transition duration-700" />
+                  </div>
+                {% else %}
+                  <div class="bg-gradient-to-br from-cyan-900/50 to-blue-900/50 h-64 flex items-center justify-center">
+                    <span class="text-6xl opacity-30">Article</span>
+                  </div>
+                {% endif %}
+
+                <!-- Content -->
+                <div class="p-8">
+                  <h2 class="text-2xl md:text-3xl font-bold font-battambang text-white group-hover:text-cyan-400 transition line-clamp-2">
+                    {{ post.title }}
+                  </h2>
+
+                  <div class="flex items-center gap-4 mt-4 text-sm text-gray-400 font-kantumruy">
+                    <span>{{ post.author.get_full_name|default:"4\null" }}</span>
+                    <span>•</span>
+                    <span>{{ post.date_created|date:"d/m/Y" }}</span>
+                  </div>
+
+                  <p class="mt-5 text-gray-300 font-kantumruy line-clamp-3 leading-relaxed">
+                    {{ post.content|striptags|truncatewords:35 }}
+                  </p>
+
+                  <div class="mt-6 flex items-center text-cyan-400 font-bold font-kantumruy group-hover:translate-x-2 transition">
+                    អានបន្ត <span class="ml-2">→</span>
+                  </div>
+                </div>
+              </a>
+            </article>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </section>
+
+  <div class="flex justify-center mb-20 ">
+    <button type="button" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center leading-5 font-btb hover:brightness-110 "><a href="/blog/">អត្ថបទទាំងអស់ →  </a></button>
+  </div>
+
+  <footer class="py-10 text-center text-gray-500 font-kantumruy text-sm border-t border-white/10">
+      © 2024 4\null Freelancer. រក្សាសិទ្ធិគ្រប់យ៉ាង។
+    </footer>
+
+  </body>
+</html>
