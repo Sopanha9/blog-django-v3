@@ -5,12 +5,10 @@ from ckeditor_uploader.fields import RichTextUploadingField
 class Post(models.Model):
     title = models.CharField(max_length=200, help_text="Enter the blog post title")
     author = models.CharField(max_length=100, help_text="Author name")
-
     is_public = models.BooleanField(default=True, help_text="Check to publish this post")
-    content = RichTextUploadingField(help_text="Write your blog content here")
     slug = models.SlugField(unique=True, max_length=200, help_text="URL-friendly version of title (auto-filled)")
     featured_image = models.ImageField(upload_to='posts/featured/', blank=True, null=True, help_text="Upload a featured image for this post")
-    content = RichTextUploadingField("ខ្លឹមសារ")
+    content = RichTextUploadingField("ខ្លឹមសារ", help_text="Write your blog content here")
     category = models.CharField(max_length=100, default='Uncategorized', help_text="Category of the blog post")
     tags = models.CharField(max_length=200, blank=True, help_text="Comma-separated tags for the post")
     date_created = models.DateTimeField(auto_now_add=True)

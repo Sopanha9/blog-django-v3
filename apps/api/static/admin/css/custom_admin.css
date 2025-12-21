@@ -1,62 +1,473 @@
-/* Custom Django Admin Styles */
+/* ============================================
+   MODERN DJANGO ADMIN DASHBOARD STYLES
+   ============================================ */
 
-/* Change header color */
+/* ===== HEADER & BRANDING ===== */
 #header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+  background: linear-gradient(
+    135deg,
+    #1e3a8a 0%,
+    #3b82f6 50%,
+    #06b6d4 100%
+  ) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  padding: 15px 20px !important;
+  color: white !important;
 }
 
 #branding h1 {
-    color: white;
+  color: white;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#branding h1::before {
+  content: "📝 ";
+  font-size: 32px;
+  margin-right: 10px;
 }
 
 #header a:link,
 #header a:visited {
-    color: white;
+  color: white;
+  font-weight: 500;
 }
 
-/* Change button colors */
-.button, input[type=submit], input[type=button], .submit-row input, button {
-    background: #667eea;
-    border: none;
+#header a:hover {
+  color: #fbbf24;
+  text-decoration: underline;
 }
 
-.button:hover, input[type=submit]:hover, input[type=button]:hover, .submit-row input:hover {
-    background: #5568d3;
+#user-tools {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
 }
 
-/* Links color */
-a:link, a:visited {
-    color: #667eea;
+/* ===== BREADCRUMBS ===== */
+div.breadcrumbs {
+  background: #f1f5f9;
+  padding: 12px 20px;
+  border-bottom: 2px solid #e2e8f0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+div.breadcrumbs a {
+  color: #3b82f6;
+}
+
+div.breadcrumbs a:hover {
+  color: #1e40af;
+}
+
+/* ===== DASHBOARD MODULES ===== */
+#content-main {
+  background: #f8fafc;
+  padding: 30px;
+}
+
+.module {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  margin-bottom: 25px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.module:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.module h2,
+.module caption {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 15px 20px;
+  margin: 0;
+}
+
+.module table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.module td,
+.module th {
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.module tr:hover {
+  background: #f1f5f9;
+}
+
+/* Dashboard action links */
+.module ul {
+  padding: 0;
+  margin: 0;
+}
+
+.module ul li {
+  list-style: none;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.module ul li:last-child {
+  border-bottom: none;
+}
+
+.module ul li a {
+  display: block;
+  padding: 15px 20px;
+  color: #1e40af;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.module ul li a:hover {
+  background: #eff6ff;
+  color: #1e3a8a;
+  padding-left: 30px;
+}
+
+.module ul li a::before {
+  content: "→ ";
+  color: #3b82f6;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+/* ===== BUTTONS ===== */
+.button,
+input[type="submit"],
+input[type="button"],
+.submit-row input,
+button,
+.object-tools a {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white !important;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.submit-row input:hover,
+button:hover,
+.object-tools a:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.button.default,
+input[type="submit"].default,
+.submit-row input.default {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.button.default:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
+/* Delete button */
+.deletelink,
+.deletelink-box a {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+}
+
+.deletelink:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+}
+
+/* ===== LINKS ===== */
+a:link,
+a:visited {
+  color: #3b82f6;
+  text-decoration: none;
+  transition: color 0.2s;
 }
 
 a:hover {
-    color: #764ba2;
+  color: #1e40af;
+  text-decoration: underline;
 }
 
-/* Module headers */
-.module h2, .module caption, .inline-group h2 {
-    background: #667eea;
+/* ===== TABLES ===== */
+#result_list {
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-/* Change list filters */
+#result_list thead th {
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  color: white;
+  font-weight: 600;
+  padding: 15px;
+  border: none;
+}
+
+#result_list tbody tr {
+  transition: background 0.2s;
+}
+
+#result_list tbody tr:hover {
+  background: #eff6ff !important;
+}
+
+#result_list tbody td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* ===== FILTERS SIDEBAR ===== */
+#changelist-filter {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 0;
+}
+
+#changelist-filter h2 {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  padding: 15px;
+  margin: 0;
+  font-weight: 600;
+  border-radius: 12px 12px 0 0;
+}
+
+#changelist-filter h3 {
+  color: #1e40af;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 15px;
+  margin: 0;
+  background: #f1f5f9;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+#changelist-filter li {
+  padding: 8px 15px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+#changelist-filter li.selected {
+  background: #eff6ff;
+}
+
 #changelist-filter li.selected a {
-    color: #667eea;
-    border-left: 5px solid #667eea;
+  color: #1e40af !important;
+  font-weight: 600;
+  border-left: 4px solid #3b82f6;
+  padding-left: 11px;
 }
 
-/* Customize breadcrumbs */
-div.breadcrumbs {
-    background: #f8f9fa;
-    color: #333;
+#changelist-filter a:hover {
+  color: #3b82f6;
+}
+
+/* ===== SEARCH BAR ===== */
+#changelist-search {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+#searchbar {
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 14px;
+  width: 300px;
+  transition: border-color 0.2s;
+}
+
+#searchbar:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* ===== FORM FIELDS ===== */
+.form-row {
+  padding: 15px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="number"],
+textarea,
+select {
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* ===== INLINE GROUPS ===== */
+.inline-group h2 {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  color: white;
+  padding: 12px 15px;
+  border-radius: 8px 8px 0 0;
+}
+
+.inline-related {
+  background: #faf5ff;
+  border: 2px solid #e9d5ff;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  padding: 15px;
+}
+
+/* ===== MESSAGES ===== */
+.messagelist {
+  padding: 0;
+  margin: 20px 0;
+}
+
+.messagelist li {
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.messagelist .success {
+  background: #d1fae5;
+  color: #065f46;
+  border-left: 4px solid #10b981;
+}
+
+.messagelist .warning {
+  background: #fef3c7;
+  color: #92400e;
+  border-left: 4px solid #f59e0b;
+}
+
+.messagelist .error {
+  background: #fee2e2;
+  color: #991b1b;
+  border-left: 4px solid #ef4444;
+}
+
+/* ===== FIELDSETS ===== */
+.aligned .form-row {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+fieldset.module {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+fieldset h2 {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  padding: 12px 20px;
+  margin: -20px -20px 20px -20px;
+  border-radius: 12px 12px 0 0;
+  font-size: 16px;
+}
+
+/* ===== PAGINATION ===== */
+.paginator {
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.paginator a {
+  padding: 8px 12px;
+  background: #f1f5f9;
+  border-radius: 6px;
+  margin: 0 3px;
+  font-weight: 500;
+}
+
+.paginator a:hover {
+  background: #3b82f6;
+  color: white;
+  text-decoration: none;
+}
+
+.paginator .this-page {
+  padding: 8px 12px;
+  background: #3b82f6;
+  color: white;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+/* ===== HELP TEXT ===== */
+.help {
+  color: #64748b;
+  font-size: 13px;
+  font-style: italic;
+}
+
+/* ===== OBJECT TOOLS ===== */
+.object-tools {
+  margin-bottom: 20px;
+}
+
+.object-tools li {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border-radius: 8px;
+}
+
+.object-tools a:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: #333;
 }
 
 /* Style the sidebar */
 .selector {
-    border: 1px solid #667eea;
+  border: 1px solid #667eea;
 }
 
 /* Custom logo/branding */
 #branding h1:before {
-    content: "📝 ";
+  content: "📝 ";
 }

@@ -1,153 +1,393 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="km" class="scroll-smooth">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ប្លក់ - អត្ថបទទាំងអស់ | 4\null Freelancer</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ប្លក់ - អត្ថបទទាំងអស់ | 4\null Freelancer</title>
 
-  <!-- SEO Meta Tags -->
+    <!-- SEO Meta Tags -->
 
-  <meta name="description" content="ប្លក់ 4\null Freelancer — ចែករំលែកចំណេះដឹង បច្ចេកវិជ្ជា និងបទពិសោធន៍ផ្ទាល់។ អានអត្ថបទថ្មីៗពីបច្ចេកវិជ្ជា និងការងារ freelancer។">
-  <link rel="canonical" href="{{ request.build_absolute_uri }}">
+    <meta
+      name="description"
+      content="ប្លក់ 4\null Freelancer — ចែករំលែកចំណេះដឹង បច្ចេកវិជ្ជា និងបទពិសោធន៍ផ្ទាល់។ អានអត្ថបទថ្មីៗពីបច្ចេកវិជ្ជា និងការងារ freelancer។"
+    />
+    <link rel="canonical" href="{{ request.build_absolute_uri }}" />
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="ប្លក់ | 4\null Freelancer">
-  <meta property="og:description" content="ចែករំលែកចំណេះដឹង បច្ចេកវិជ្ជា និងបទពិសោធន៍ផ្ទាល់">
-  <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="ប្លក់ | 4\null Freelancer" />
+    <meta
+      property="og:description"
+      content="ចែករំលែកចំណេះដឹង បច្ចេកវិជ្ជា និងបទពិសោធន៍ផ្ទាល់"
+    />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="ប្លក់ | 4\null Freelancer">
-  <meta name="twitter:description" content="ចែករំលែកចំណេះដឹង បច្ចេកវិជ្ជា និងបទពិសោធន៍ផ្ទាល់">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="ប្លក់ | 4\null Freelancer" />
+    <meta
+      name="twitter:description"
+      content="ចែករំលែកចំណេះដឹង បច្ចេកវិជ្ជា និងបទពិសោធន៍ផ្ទាល់"
+    />
 
-  <!-- Khmer Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&family=Battambang:wght@700;900&display=swap" rel="stylesheet">
+    <!-- Khmer Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&family=Battambang:wght@700;900&display=swap"
+      rel="stylesheet"
+    />
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            kantumruy: ['Kantumruy Pro', 'sans-serif'],
-            battambang: ['Battambang', 'sans-serif'],
-          }
-        }
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              kantumruy: ["Kantumruy Pro", "sans-serif"],
+              battambang: ["Battambang", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Theme Variables */
+      :root {
+        --bg-primary: linear-gradient(
+          to bottom right,
+          rgb(17, 24, 39),
+          rgb(24, 24, 27),
+          rgb(0, 0, 0)
+        );
+        --bg-nav: rgba(0, 0, 0, 0.4);
+        --bg-card: rgba(255, 255, 255, 0.05);
+        --border-color: rgba(255, 255, 255, 0.1);
+        --text-primary: rgb(255, 255, 255);
+        --text-secondary: rgb(209, 213, 219);
+        --text-muted: rgb(156, 163, 175);
       }
-    }
-  </script>
-</head>
 
-<body class="min-h-screen bg-gradient-to-br from-gray-900 via-zinc-900 to-black text-white">
+      .light-mode {
+        --bg-primary: linear-gradient(
+          to bottom right,
+          rgb(241, 245, 249),
+          rgb(226, 232, 240),
+          rgb(203, 213, 225)
+        );
+        --bg-nav: rgba(255, 255, 255, 0.8);
+        --bg-card: rgba(255, 255, 255, 0.9);
+        --border-color: rgba(0, 0, 0, 0.1);
+        --text-primary: rgb(15, 23, 42);
+        --text-secondary: rgb(51, 65, 85);
+        --text-muted: rgb(100, 116, 139);
+      }
 
-  <!-- Fixed Glass Navbar (same as homepage) -->
-  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/40 border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-      <a href="/" class="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent font-battambang">
-        4\null Freelancer
-      </a>
-      <div class="flex space-x-10 font-kantumruy text-gray-300">
-        <a href="/" class="hover:text-white transition">ទំព័រដើម</a>
-        <a href="/blog/" class="text-cyan-400 font-semibold">ប្លក់</a>
-        <a href="#" class="hover:text-white transition">គម្រោង</a>
-        <a href="#" class="hover:text-white transition">ទំនាក់ទំនង</a>
-      </div>
-    </div>
-  </nav>
+      body {
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        transition: background 0.3s ease, color 0.3s ease;
+      }
 
-  <!-- Blog Posts Page Content -->
-  <section class="pt-32 pb-20 px-6">
-    <div class="max-w-7xl mx-auto">
+      .theme-card {
+        background: var(--bg-card);
+        border-color: var(--border-color);
+      }
 
-      <div class="text-center mb-16">
-        <h1 class="text-5xl md:text-7xl font-extrabold font-battambang bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-          ប្លក់របស់យើង
-        </h1>
-        <p class="mt-6 text-xl text-gray-400 font-kantumruy">
-          ចែករំលែកចំណេះដឹង បច្ចេកទេស និងបទពិសោធន៍ផ្ទាល់
-        </p>
-        <!-- Search Form -->
-        <form action="" method="get" class="mt-8 max-w-2xl mx-auto">
-          <label for="q" class="sr-only">ស្វែងរកអត្ថបទ</label>
-          <div class="flex items-center gap-3">
-            <input type="text" id="q" name="q" value="{{ q|default:'' }}"
-                   placeholder="ស្វែងរកតាមចំណងជើង មាតិកា ឬស្លាក..."
-                   class="w-full px-5 py-3 rounded-xl bg-white/10 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 font-kantumruy" />
-            <button type="submit" class="px-6 py-3 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold font-kantumruy">ស្វែងរក</button>
+      .theme-nav {
+        background: var(--bg-nav);
+        border-color: var(--border-color);
+      }
+
+      .theme-text {
+        color: var(--text-primary);
+      }
+
+      .theme-text-secondary {
+        color: var(--text-secondary);
+      }
+
+      .theme-text-muted {
+        color: var(--text-muted);
+      }
+
+      /* Toggle Switch Styles */
+      .theme-toggle {
+        position: relative;
+        width: 60px;
+        height: 30px;
+        background: rgba(100, 116, 139, 0.3);
+        border-radius: 30px;
+        cursor: pointer;
+        transition: background 0.3s;
+        border: 2px solid rgba(148, 163, 184, 0.2);
+      }
+
+      .theme-toggle:hover {
+        background: rgba(100, 116, 139, 0.4);
+      }
+
+      .theme-toggle-slider {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 22px;
+        height: 22px;
+        background: white;
+        border-radius: 50%;
+        transition: transform 0.3s;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .light-mode .theme-toggle-slider {
+        transform: translateX(30px);
+        background: #fbbf24;
+      }
+
+      .theme-toggle-icon {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 14px;
+        transition: opacity 0.3s;
+      }
+
+      .theme-toggle-icon.moon {
+        left: 6px;
+        opacity: 1;
+      }
+
+      .theme-toggle-icon.sun {
+        right: 6px;
+        opacity: 0.3;
+      }
+
+      .light-mode .theme-toggle-icon.moon {
+        opacity: 0.3;
+      }
+
+      .light-mode .theme-toggle-icon.sun {
+        opacity: 1;
+      }
+
+      /* Light mode text overrides - stronger contrast for readability */
+      .light-mode .text-white {
+        color: rgb(15, 23, 42) !important;
+      }
+
+      .light-mode .text-gray-200,
+      .light-mode .text-gray-300 {
+        color: rgb(30, 41, 59) !important;
+      }
+
+      .light-mode .text-gray-400 {
+        color: rgb(71, 85, 105) !important;
+      }
+
+      .light-mode .text-gray-500 {
+        color: rgb(100, 116, 139) !important;
+      }
+
+      .light-mode .text-gray-600 {
+        color: rgb(51, 65, 85) !important;
+      }
+
+      .light-mode .text-cyan-300,
+      .light-mode .text-cyan-400 {
+        color: rgb(14, 116, 144) !important;
+      }
+
+      /* Light mode card backgrounds */
+      .light-mode .bg-white\/5 {
+        background: rgba(255, 255, 255, 0.9) !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+
+  <body class="min-h-screen transition-all duration-300">
+    <!-- Fixed Glass Navbar (same as homepage) -->
+    <nav
+      class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl theme-nav border-b transition-all duration-300"
+    >
+      <div
+        class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center"
+      >
+        <a
+          href="/"
+          class="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent font-battambang"
+        >
+          4\null Freelancer
+        </a>
+        <div class="flex items-center space-x-6">
+          <div class="flex space-x-10 font-kantumruy theme-text-secondary">
+            <a href="/" class="hover:text-cyan-400 transition">ទំព័រដើម</a>
+            <a href="{% url 'blog_list' %}" class="text-cyan-400 font-semibold"
+              >ប្លក់</a
+            >
+            <a href="#" class="hover:text-cyan-400 transition">គម្រោង</a>
+            <a href="#" class="hover:text-cyan-400 transition">ទំនាក់ទំនង</a>
           </div>
-          {% if q %}
-            <p class="mt-3 text-sm text-gray-400 font-kantumruy">លទ្ធផលស្វែងរកសម្រាប់: "{{ q }}" — រកឃើញ {{ posts|length }} អត្ថបទ</p>
-          {% endif %}
-        </form>
+          <!-- Theme Toggle -->
+          <button
+            id="themeToggle"
+            class="theme-toggle"
+            aria-label="Toggle theme"
+          >
+            <span class="theme-toggle-icon moon">🌙</span>
+            <span class="theme-toggle-icon sun">☀️</span>
+            <div class="theme-toggle-slider"></div>
+          </button>
+        </div>
       </div>
+    </nav>
 
-      <!-- Posts Grid -->
-      {% if posts %}
+    <!-- Blog Posts Page Content -->
+    <section class="pt-32 pb-20 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h1
+            class="text-5xl md:text-7xl font-extrabold font-battambang bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
+          >
+            ប្លក់របស់យើង
+          </h1>
+          <p class="mt-6 text-xl text-gray-400 font-kantumruy">
+            ចែករំលែកចំណេះដឹង បច្ចេកទេស និងបទពិសោធន៍ផ្ទាល់
+          </p>
+          <!-- Search Form -->
+          <form action="" method="get" class="mt-8 max-w-2xl mx-auto">
+            <label for="q" class="sr-only">ស្វែងរកអត្ថបទ</label>
+            <div class="flex items-center gap-3">
+              <input
+                type="text"
+                id="q"
+                name="q"
+                value="{{ q|default:'' }}"
+                placeholder="ស្វែងរកតាមចំណងជើង មាតិកា ឬស្លាក..."
+                class="w-full px-5 py-3 rounded-xl bg-white/10 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 font-kantumruy"
+              />
+              <button
+                type="submit"
+                class="px-6 py-3 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold font-kantumruy"
+              >
+                ស្វែងរក
+              </button>
+            </div>
+            {% if q %}
+            <p class="mt-3 text-sm text-gray-400 font-kantumruy">
+              លទ្ធផលស្វែងរកសម្រាប់: "{{ q }}" — រកឃើញ {{ posts|length }} អត្ថបទ
+            </p>
+            {% endif %}
+          </form>
+        </div>
+
+        <!-- Posts Grid -->
+        {% if posts %}
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {% for post in posts %}
-            <article class="group bg-white/5 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 hover:border-cyan-500/50 transition-all duration-500 hover:-translate-y-3 shadow-xl">
-              <a href="{% url 'blog_detail' post.slug %}">
-                
-                <!-- Featured Image -->
-                {% if post.featured_image %}
-                  <div class="overflow-hidden">
-                    <img src="{{ post.featured_image.url }}" 
-                         alt="{{ post.title }}" 
-                         class="w-full h-64 object-cover group-hover:scale-110 transition duration-700" />
-                  </div>
-                {% else %}
-                  <div class="bg-gradient-to-br from-cyan-900/50 to-blue-900/50 h-64 flex items-center justify-center">
-                    <span class="text-6xl opacity-30">Article</span>
-                  </div>
-                {% endif %}
+          <article
+            class="group theme-card backdrop-blur-xl rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-3 shadow-xl hover:border-cyan-500/50"
+            style="border: 1px solid var(--border-color)"
+          >
+            <a href="{% url 'blog_detail' post.slug %}">
+              <!-- Featured Image -->
+              {% if post.featured_image %}
+              <div class="overflow-hidden">
+                <img
+                  src="{{ post.featured_image.url }}"
+                  alt="{{ post.title }}"
+                  class="w-full h-64 object-cover group-hover:scale-110 transition duration-700"
+                />
+              </div>
+              {% else %}
+              <div
+                class="bg-gradient-to-br from-cyan-900/50 to-blue-900/50 h-64 flex items-center justify-center"
+              >
+                <span class="text-6xl opacity-30">Article</span>
+              </div>
+              {% endif %}
 
-                <!-- Content -->
-                <div class="p-8">
-                  <h2 class="text-2xl md:text-3xl font-bold font-battambang text-white group-hover:text-cyan-400 transition line-clamp-2">
-                    {{ post.title }}
-                  </h2>
+              <!-- Content -->
+              <div class="p-8">
+                <h2
+                  class="text-2xl md:text-3xl font-bold font-battambang theme-text group-hover:text-cyan-400 transition line-clamp-2"
+                >
+                  {{ post.title }}
+                </h2>
 
-                  <div class="flex items-center gap-4 mt-4 text-sm text-gray-400 font-kantumruy">
-                    <span>{{ post.author.get_full_name|default:"4\null" }}</span>
-                    <span>•</span>
-                    <span>{{ post.date_created|date:"d/m/Y" }}</span>
-                  </div>
-
-                  <p class="mt-5 text-gray-300 font-kantumruy line-clamp-3 leading-relaxed">
-                    {{ post.content|striptags|truncatewords:35 }}
-                  </p>
-
-                  <div class="mt-6 flex items-center text-cyan-400 font-bold font-kantumruy group-hover:translate-x-2 transition">
-                    អានបន្ត <span class="ml-2">→</span>
-                  </div>
+                <div
+                  class="flex items-center gap-4 mt-4 text-sm theme-text-muted font-kantumruy"
+                >
+                  <span>{{ post.author.get_full_name|default:"4\null" }}</span>
+                  <span>•</span>
+                  <span>{{ post.date_created|date:"d/m/Y" }}</span>
                 </div>
-              </a>
-            </article>
+
+                <p
+                  class="mt-5 theme-text-secondary font-kantumruy line-clamp-3 leading-relaxed"
+                >
+                  {{ post.content|striptags|truncatewords:35 }}
+                </p>
+
+                <div
+                  class="mt-6 flex items-center text-cyan-400 font-bold font-kantumruy group-hover:translate-x-2 transition"
+                >
+                  អានបន្ត <span class="ml-2">→</span>
+                </div>
+              </div>
+            </a>
+          </article>
           {% endfor %}
         </div>
-      {% else %}
+        {% else %}
         <div class="text-center py-20">
           {% if q %}
-            <p class="text-3xl text-gray-500 font-kantumruy">គ្មានលទ្ធផលសម្រាប់ "{{ q }}"</p>
-            <p class="mt-4 text-gray-600 font-kantumruy">សូមព្យាយាមពាក្យគន្លឹះផ្សេងទៀត ឬលុបការស្វែងរក។</p>
+          <p class="text-3xl theme-text-muted font-kantumruy">
+            គ្មានលទ្ធផលសម្រាប់ "{{ q }}"
+          </p>
+          <p class="mt-4 theme-text-muted font-kantumruy">
+            សូមព្យាយាមពាក្យគន្លឹះផ្សេងទៀត ឬលុបការស្វែងរក។
+          </p>
           {% else %}
-            <p class="text-3xl text-gray-500 font-kantumruy">មិនទាន់មានអត្ថបទនៅឡើយទេ...</p>
-            <p class="mt-4 text-gray-600">តាមដានប្លក់នេះឱ្យបានទៀងទាត់!</p>
+          <p class="text-3xl theme-text-muted font-kantumruy">
+            មិនទាន់មានអត្ថបទនៅឡើយទេ...
+          </p>
+          <p class="mt-4 theme-text-muted">តាមដានប្លក់នេះឱ្យបានទៀងទាត់!</p>
           {% endif %}
         </div>
-      {% endif %}
+        {% endif %}
+      </div>
+    </section>
 
-    </div>
-  </section>
+    <!-- Footer (optional) -->
+    <footer
+      class="py-10 text-center theme-text-muted font-kantumruy text-sm border-t transition-colors duration-300"
+      style="border-color: var(--border-color)"
+    >
+      © 2025 4\null Freelancer • បង្កើតដោយ ❤️ និងកាហ្វេជាច្រើន
+    </footer>
 
-  <!-- Footer (optional) -->
-  <footer class="py-10 text-center text-gray-500 font-kantumruy text-sm border-t border-white/10">
-    © 2025 4\null Freelancer • បង្កើតដោយ ❤️ និងកាហ្វេជាច្រើន
-  </footer>
+    <!-- Theme Toggle Script -->
+    <script>
+      // Check for saved theme preference or default to dark
+      const currentTheme = localStorage.getItem("theme") || "dark";
+      if (currentTheme === "light") {
+        document.body.classList.add("light-mode");
+      }
 
-</body>
+      // Toggle theme
+      document
+        .getElementById("themeToggle")
+        .addEventListener("click", function () {
+          document.body.classList.toggle("light-mode");
+
+          // Save preference
+          const theme = document.body.classList.contains("light-mode")
+            ? "light"
+            : "dark";
+          localStorage.setItem("theme", theme);
+        });
+    </script>
+  </body>
 </html>

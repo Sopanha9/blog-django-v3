@@ -26,11 +26,11 @@ def blog_detail(request, slug):
     post = get_object_or_404(Post, slug=slug, is_public=True)
     comments_qs = post.comments.filter(is_approved=True).order_by('-date_created')
     try:
-        count = int(request.GET.get('c', '5'))
+        count = int(request.GET.get('c', '3'))
     except ValueError:
-        count = 5
+        count = 3
     if count < 1:
-        count = 5
+        count = 3
     shown_comments = list(comments_qs[:count])
     total_comments = comments_qs.count()
     has_more_comments = total_comments > count

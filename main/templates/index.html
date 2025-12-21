@@ -30,16 +30,154 @@
         },
       };
     </script>
+    <style>
+      /* Theme Variables */
+      :root {
+        --bg-primary: linear-gradient(to bottom right, rgb(17, 24, 39), rgb(24, 24, 27), rgb(0, 0, 0));
+        --bg-nav: rgba(0, 0, 0, 0.4);
+        --bg-card: rgba(255, 255, 255, 0.05);
+        --border-color: rgba(255, 255, 255, 0.1);
+        --text-primary: rgb(255, 255, 255);
+        --text-secondary: rgb(209, 213, 219);
+        --text-muted: rgb(156, 163, 175);
+      }
+      
+      .light-mode {
+        --bg-primary: linear-gradient(to bottom right, rgb(241, 245, 249), rgb(226, 232, 240), rgb(203, 213, 225));
+        --bg-nav: rgba(255, 255, 255, 0.8);
+        --bg-card: rgba(255, 255, 255, 0.9);
+        --border-color: rgba(0, 0, 0, 0.1);
+        --text-primary: rgb(15, 23, 42);
+        --text-secondary: rgb(51, 65, 85);
+        --text-muted: rgb(100, 116, 139);
+      }
+      
+      body {
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+      
+      .theme-card {
+        background: var(--bg-card);
+        border-color: var(--border-color);
+      }
+      
+      .theme-nav {
+        background: var(--bg-nav);
+        border-color: var(--border-color);
+      }
+      
+      .theme-text {
+        color: var(--text-primary);
+      }
+      
+      .theme-text-secondary {
+        color: var(--text-secondary);
+      }
+      
+      .theme-text-muted {
+        color: var(--text-muted);
+      }
+      
+      /* Toggle Switch Styles */
+      .theme-toggle {
+        position: relative;
+        width: 60px;
+        height: 30px;
+        background: rgba(100, 116, 139, 0.3);
+        border-radius: 30px;
+        cursor: pointer;
+        transition: background 0.3s;
+        border: 2px solid rgba(148, 163, 184, 0.2);
+      }
+      
+      .theme-toggle:hover {
+        background: rgba(100, 116, 139, 0.4);
+      }
+      
+      .theme-toggle-slider {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 22px;
+        height: 22px;
+        background: white;
+        border-radius: 50%;
+        transition: transform 0.3s;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      }
+      
+      .light-mode .theme-toggle-slider {
+        transform: translateX(30px);
+        background: #fbbf24;
+      }
+      
+      .theme-toggle-icon {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 14px;
+        transition: opacity 0.3s;
+      }
+      
+      .theme-toggle-icon.moon {
+        left: 6px;
+        opacity: 1;
+      }
+      
+      .theme-toggle-icon.sun {
+        right: 6px;
+        opacity: 0.3;
+      }
+      
+      .light-mode .theme-toggle-icon.moon {
+        opacity: 0.3;
+      }
+      
+      .light-mode .theme-toggle-icon.sun {
+        opacity: 1;
+      }
+      
+      /* Light mode overrides */
+      .light-mode .text-white {
+        color: rgb(15, 23, 42) !important;
+      }
+      
+      .light-mode .text-gray-200,
+      .light-mode .text-gray-300 {
+        color: rgb(30, 41, 59) !important;
+      }
+      
+      .light-mode .text-gray-400 {
+        color: rgb(71, 85, 105) !important;
+      }
+      
+      .light-mode .text-gray-500 {
+        color: rgb(100, 116, 139) !important;
+      }
+      
+      .light-mode .text-cyan-300,
+      .light-mode .text-cyan-400 {
+        color: rgb(14, 116, 144) !important;
+      }
+      
+      /* Light mode buttons */
+      .light-mode .bg-cyan-500\/20 {
+        background: rgba(6, 182, 212, 0.2) !important;
+      }
+    </style>
   </head>
 
   <body
-    class="min-h-screen bg-gradient-to-br from-gray-900 via-zinc-900 to-black"
+    class="min-h-screen transition-all duration-300"
   >
     <!-- Dark Glass Navbar -->
     <nav class="fixed top-0 left-0 right-0 z-50">
       <div class="max-w-7xl mx-auto px-6 py-5">
         <div
-          class="backdrop-blur-xl bg-black/40 border border-white/10 rounded-2xl shadow-2xl"
+          class="backdrop-blur-xl theme-nav rounded-2xl shadow-2xl transition-all duration-300"
+          style="border: 1px solid var(--border-color)"
         >
           <div class="flex justify-between items-center px-8 py-5">
             <!-- Logo - Now supports Khmer perfectly -->
@@ -50,31 +188,44 @@
               4\null Freelancer
             </a>
 
-            <div class="flex space-x-10 text-lg font-btb">
-              <a
-                href="#"
-                class="text-gray-200 hover:text-white transition hover:scale-110 font-ktr"
-                >ទំព័រដើម</a
+            <div class="flex items-center gap-6">
+              <div class="flex space-x-10 text-lg font-btb">
+                <a
+                  href="#"
+                  class="theme-text-secondary hover:text-cyan-400 transition hover:scale-110 font-ktr"
+                  >ទំព័រដើម</a
+                >
+                <a
+                  href="#"
+                  class="theme-text-secondary hover:text-cyan-400 transition hover:scale-110 font-ktr"
+                  >អំពីយើង</a
+                >
+                <a
+                  href="/blog/"
+                  class="theme-text-secondary hover:text-cyan-400 transition hover:scale-110 font-ktr"
+                  >ប្លក់</a
+                >
+                <a
+                  href="#"
+                  class="theme-text-secondary hover:text-cyan-400 transition hover:scale-110 font-ktr"
+                  >ទំនាក់ទំនង</a
+                >
+              </div>
+              
+              <!-- Theme Toggle -->
+              <button
+                id="themeToggle"
+                class="theme-toggle"
+                aria-label="Toggle theme"
               >
-              <a
-                href="#"
-                class="text-gray-200 hover:text-white transition hover:scale-110 font-ktr"
-                >អំពីយើង</a
-              >
-              <a
-                href="/blog/"
-                class="text-gray-200 hover:text-white transition hover:scale-110 font-ktr"
-                >ប្លក់</a
-              >
-              <a
-                href="#"
-                class="text-gray-200 hover:text-white transition hover:scale-110 font-ktr"
-                >ទំនាក់ទំនង</a
-              >
+                <span class="theme-toggle-icon moon">🌙</span>
+                <span class="theme-toggle-icon sun">☀️</span>
+                <div class="theme-toggle-slider"></div>
+              </button>
             </div>
 
             <a
-              href="#"
+              href="./blog/"
               class="px-8 py-3 bg-cyan-500/20 border border-cyan-400/40 rounded-full text-cyan-300 font-bold hover:bg-cyan-500/30 hover:text-white transition font-ktr"
             >
               ចាប់ផ្តើមឥឡូវ
@@ -92,7 +243,7 @@
         </p>
 
         <h1
-          class="text-5xl md:text-7xl font-extrabold leading-tight font-btb text-white"
+          class="text-5xl md:text-7xl font-extrabold leading-tight font-btb theme-text"
         >
           ពួកយើងជា <br />
           <span class="text-cyan-400">Full Stack Developer</span><br />
@@ -129,7 +280,7 @@
 
     <section class="py-20 px-6">
     <div class="max-w-7xl mx-auto">
-      <h2 class="text-4xl font-bold text-center mb-16 font-battambang text-white font-btb">
+      <h2 class="text-4xl font-bold text-center mb-16 font-battambang theme-text font-btb">
         អត្ថបទថ្មីៗរបស់ពួកយើង
       </h2>
 
@@ -137,7 +288,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
         <!-- Repeat this card for each project -->
         {% for post in posts|slice:":3" %}
-            <article class="group bg-white/5 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 hover:border-cyan-500/50 transition-all duration-500 hover:-translate-y-3 shadow-xl">
+            <article class="group theme-card backdrop-blur-xl rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-3 shadow-xl hover:border-cyan-500/50" style="border: 1px solid var(--border-color)">
               <a href="{% url 'blog_detail' post.slug %}">
                 
                 <!-- Featured Image -->
@@ -155,17 +306,17 @@
 
                 <!-- Content -->
                 <div class="p-8">
-                  <h2 class="text-2xl md:text-3xl font-bold font-battambang text-white group-hover:text-cyan-400 transition line-clamp-2">
+                  <h2 class="text-2xl md:text-3xl font-bold font-battambang theme-text group-hover:text-cyan-400 transition line-clamp-2">
                     {{ post.title }}
                   </h2>
 
-                  <div class="flex items-center gap-4 mt-4 text-sm text-gray-400 font-kantumruy">
+                  <div class="flex items-center gap-4 mt-4 text-sm theme-text-muted font-kantumruy">
                     <span>{{ post.author.get_full_name|default:"4\null" }}</span>
                     <span>•</span>
                     <span>{{ post.date_created|date:"d/m/Y" }}</span>
                   </div>
 
-                  <p class="mt-5 text-gray-300 font-kantumruy line-clamp-3 leading-relaxed">
+                  <p class="mt-5 theme-text-secondary font-kantumruy line-clamp-3 leading-relaxed">
                     {{ post.content|striptags|truncatewords:35 }}
                   </p>
 
@@ -184,9 +335,26 @@
     <button type="button" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center leading-5 font-btb hover:brightness-110 "><a href="/blog/">អត្ថបទទាំងអស់ →  </a></button>
   </div>
 
-  <footer class="py-10 text-center text-gray-500 font-kantumruy text-sm border-t border-white/10">
+  <footer class="py-10 text-center theme-text-muted font-kantumruy text-sm border-t transition-colors duration-300" style="border-color: var(--border-color)">
       © 2024 4\null Freelancer. រក្សាសិទ្ធិគ្រប់យ៉ាង។
     </footer>
 
+    <!-- Theme Toggle Script -->
+    <script>
+      // Check for saved theme preference or default to dark
+      const currentTheme = localStorage.getItem('theme') || 'dark';
+      if (currentTheme === 'light') {
+        document.body.classList.add('light-mode');
+      }
+      
+      // Toggle theme
+      document.getElementById('themeToggle').addEventListener('click', function() {
+        document.body.classList.toggle('light-mode');
+        
+        // Save preference
+        const theme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', theme);
+      });
+    </script>
   </body>
 </html>

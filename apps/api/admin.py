@@ -14,7 +14,7 @@ class PostAdmin(admin.ModelAdmin):
     
     fieldsets = (
         ('Post Content', {
-            'fields': ('title', 'featured_image', 'slug', 'author', 'category', 'content', 'tags')
+            'fields': ('title', 'featured_image', 'slug', 'author', 'category', 'tags', 'content')
         }),
         ('Settings', {
             'fields': ('is_public',)
@@ -24,11 +24,6 @@ class PostAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
-    
-    class Media:
-        css = {
-            'all': ('admin/css/custom_admin.css',)
-        }
 
 
 @admin.register(Comment)

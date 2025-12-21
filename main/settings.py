@@ -34,7 +34,8 @@ ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1']
 
 # Application definition
 
-INSTALLED_APPS = [  
+INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -65,7 +66,7 @@ ROOT_URLCONF = 'main.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'main' / 'templates'],
+        'DIRS': [BASE_DIR / 'main' / 'templates', BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -163,3 +164,37 @@ CKEDITOR_CONFIGS = {
 # Allow CKEditor image uploads
 CKEDITOR_ALLOW_NONIMAGE_FILES = False
 CKEDITOR_IMAGE_BACKEND = 'pillow'
+
+# Jazzmin Settings
+JAZZMIN_SETTINGS = {
+    "site_title": "Blog CMS Admin",
+    "site_header": "Blog CMS",
+    "site_brand": "Blog Management",
+    "welcome_sign": "Welcome to Blog CMS Admin Panel",
+    "search_model": ["api.Post", "api.Comment"],
+    
+    "topmenu_links": [
+        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "View Site", "url": "/", "new_window": True},
+    ],
+    
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "api.Post": "fas fa-blog",
+        "api.Comment": "fas fa-comments",
+    },
+    
+    "changeform_format": "vertical_tabs",
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "navbar": "navbar-white navbar-light",
+    "navbar_fixed": True,
+    "sidebar_fixed": True,
+    "theme": "flatly",
+}
