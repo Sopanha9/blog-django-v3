@@ -25,6 +25,11 @@ class PostAdmin(admin.ModelAdmin):
         }),
     )
 
+    class Media:
+        css = {
+            'all': ('admin/css/custom_admin.css',)
+        }
+
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):

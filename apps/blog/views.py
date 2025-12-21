@@ -2,10 +2,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from apps.api.models import Post, Comment
 from django.db.models import Q
+from django.core.paginator import Paginator
 
 
 def blog_list(request):
-    """Display all public blog posts with optional search"""
+    """Display all public blog posts with optional search and pagination"""
     q = request.GET.get('q', '').strip()
     base_qs = Post.objects.filter(is_public=True)
     if q:
@@ -16,7 +17,14 @@ def blog_list(request):
             | Q(category__icontains=q)
             | Q(author__icontains=q)
         )
-    posts = base_qs.order_by('-date_created')
+    
+    posts_list = base_qs.order_by('-date_created')
+    
+    # Pagination: 6 posts per page
+    paginator = Paginator(posts_list, 6)
+    page_number = request.GET.get('page')
+    posts = paginator.get_page(page_number)
+    
     context = {'posts': posts, 'q': q}
     return render(request, 'blog/blog_list.html', context)
 

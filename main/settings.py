@@ -148,7 +148,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
-        'height': 400,
+        'height': 700,
         'width': '100%',
         'filebrowserUploadUrl': '/ckeditor/upload/',
         'filebrowserBrowseUrl': '/ckeditor/browse/',
@@ -189,7 +189,8 @@ JAZZMIN_SETTINGS = {
         "api.Comment": "fas fa-comments",
     },
     
-    "changeform_format": "vertical_tabs",
+    "changeform_format": "horizontal_tabs",
+    "custom_css": "admin/css/custom_admin.css",
 }
 
 JAZZMIN_UI_TWEAKS = {

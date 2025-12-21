@@ -284,7 +284,7 @@
 
         <!-- Posts Grid -->
         {% if posts %}
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {% for post in posts %}
           <article
             class="group theme-card backdrop-blur-xl rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-3 shadow-xl hover:border-cyan-500/50"
@@ -297,21 +297,21 @@
                 <img
                   src="{{ post.featured_image.url }}"
                   alt="{{ post.title }}"
-                  class="w-full h-64 object-cover group-hover:scale-110 transition duration-700"
+                  class="w-full h-48 object-cover group-hover:scale-110 transition duration-700"
                 />
               </div>
               {% else %}
               <div
-                class="bg-gradient-to-br from-cyan-900/50 to-blue-900/50 h-64 flex items-center justify-center"
+                class="bg-gradient-to-br from-cyan-900/50 to-blue-900/50 h-48 flex items-center justify-center"
               >
                 <span class="text-6xl opacity-30">Article</span>
               </div>
               {% endif %}
 
               <!-- Content -->
-              <div class="p-8">
+              <div class="p-6">
                 <h2
-                  class="text-2xl md:text-3xl font-bold font-battambang theme-text group-hover:text-cyan-400 transition line-clamp-2"
+                  class="text-xl md:text-2xl font-bold font-battambang theme-text group-hover:text-cyan-400 transition line-clamp-2"
                 >
                   {{ post.title }}
                 </h2>
@@ -325,13 +325,13 @@
                 </div>
 
                 <p
-                  class="mt-5 theme-text-secondary font-kantumruy line-clamp-3 leading-relaxed"
+                  class="mt-4 theme-text-secondary font-kantumruy line-clamp-2 leading-relaxed text-sm"
                 >
-                  {{ post.content|striptags|truncatewords:35 }}
+                  {{ post.content|striptags|truncatewords:20 }}
                 </p>
 
                 <div
-                  class="mt-6 flex items-center text-cyan-400 font-bold font-kantumruy group-hover:translate-x-2 transition"
+                  class="mt-4 flex items-center text-cyan-400 font-bold font-kantumruy group-hover:translate-x-2 transition text-sm"
                 >
                   អានបន្ត <span class="ml-2">→</span>
                 </div>
@@ -340,7 +340,35 @@
           </article>
           {% endfor %}
         </div>
-        {% else %}
+
+        <!-- Pagination -->
+        {% if posts.has_other_pages %}
+        <div class="mt-16 flex justify-center gap-4 font-kantumruy">
+          {% if posts.has_previous %}
+          <a
+            href="?page={{ posts.previous_page_number }}{% if q %}&q={{ q }}{% endif %}"
+            class="px-6 py-3 rounded-xl bg-white/5 border border-white/10 theme-text hover:bg-cyan-500/20 transition"
+          >
+            ← ថយក្រោយ
+          </a>
+          {% endif %}
+
+          <div
+            class="flex items-center px-6 py-3 rounded-xl bg-cyan-600 text-white font-bold"
+          >
+            ទំព័រ {{ posts.number }} នៃ {{ posts.paginator.num_pages }}
+          </div>
+
+          {% if posts.has_next %}
+          <a
+            href="?page={{ posts.next_page_number }}{% if q %}&q={{ q }}{% endif %}"
+            class="px-6 py-3 rounded-xl bg-white/5 border border-white/10 theme-text hover:bg-cyan-500/20 transition"
+          >
+            បន្ទាប់ →
+          </a>
+          {% endif %}
+        </div>
+        {% endif %} {% else %}
         <div class="text-center py-20">
           {% if q %}
           <p class="text-3xl theme-text-muted font-kantumruy">
