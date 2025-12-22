@@ -106,7 +106,13 @@ STATICFILES_DIRS = [
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Use WhiteNoise to handle compression and caching
+# Find your current STORAGES block and replace it with this:
 STORAGES = {
+    # Default is for media/user uploads (CKEditor images, etc.)
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    # Staticfiles is for your CSS, JS, and Assets (WhiteNoise)
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
