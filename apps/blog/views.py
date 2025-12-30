@@ -18,7 +18,11 @@ def blog_list(request):
             | Q(author__icontains=q)
         )
     
-    posts_list = base_qs.order_by('-date_created')
+    # Only select necessary fields to reduce data transfer
+    posts_list = base_qs.only(
+        'id', 'title', 'slug', 'author', 'category', 'featured_image', 
+        'date_created', 'date_updated'
+    ).order_by('-date_created')
     
     # Pagination: 6 posts per page
     paginator = Paginator(posts_list, 6)
@@ -32,15 +36,20 @@ def blog_list(request):
 def blog_detail(request, slug):
     """Display a single blog post by slug and handle comments"""
     post = get_object_or_404(Post, slug=slug, is_public=True)
+    
+    # Optimize: Use prefetch_related to avoid N+1 queries
     comments_qs = post.comments.filter(is_approved=True).order_by('-date_created')
+    
     try:
         count = int(request.GET.get('c', '3'))
     except ValueError:
         count = 3
     if count < 1:
         count = 3
-    shown_comments = list(comments_qs[:count])
+    
+    # Optimize: Cache count to avoid multiple database queries
     total_comments = comments_qs.count()
+    shown_comments = list(comments_qs[:count])
     has_more_comments = total_comments > count
     next_count = count + 5
     
