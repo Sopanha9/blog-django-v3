@@ -47,9 +47,9 @@ def blog_detail(request, slug):
     if count < 1:
         count = 3
     
-    # Use iterator for large result sets and cache count for reuse
+    # Optimize: Cache count to avoid multiple database queries
+    total_comments = comments_qs.count()
     shown_comments = list(comments_qs[:count])
-    total_comments = len(shown_comments) if count >= comments_qs.count() else comments_qs.count()
     has_more_comments = total_comments > count
     next_count = count + 5
     
