@@ -1,360 +1,378 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="km">
-  <!-- better for Khmer -->
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>4\null Freelancer - អ្នកជំនាញឯករាជ្យលេខ១</title>
+<!-- better for Khmer -->
 
-    <!-- Google Fonts - Only real Khmer fonts + one nice Latin -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Battambang:wght@300;400;700;900&family=Kantumruy+Pro:wght@300;400;500;700&family=Khmer:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4\null Freelancer - អ្នកជំនាញឯករាជ្យលេខ១</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      // FIXED THE TYPO HERE ← this was the main bug!
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              khmer: ["Khmer", "sans-serif"],
-              ktr: ["Kantumruy Pro", "sans-serif"],
-              btb: ["Battambang", "sans-serif"],
-            },
+  <!-- Google Fonts - Only real Khmer fonts + one nice Latin -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Battambang:wght@300;400;700;900&family=Kantumruy+Pro:wght@300;400;500;700&family=Khmer:wght@400;700&display=swap"
+    rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // FIXED THE TYPO HERE ← this was the main bug!
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            khmer: ["Khmer", "sans-serif"],
+            ktr: ["Kantumruy Pro", "sans-serif"],
+            btb: ["Battambang", "sans-serif"],
           },
         },
-      };
-    </script>
-    <style>
-      /* Theme Variables */
-      :root {
-        --bg-primary: linear-gradient(to bottom right, rgb(17, 24, 39), rgb(24, 24, 27), rgb(0, 0, 0));
-        --bg-nav: rgba(0, 0, 0, 0.4);
-        --bg-card: rgba(255, 255, 255, 0.05);
-        --border-color: rgba(255, 255, 255, 0.1);
-        --text-primary: rgb(255, 255, 255);
-        --text-secondary: rgb(209, 213, 219);
-        --text-muted: rgb(156, 163, 175);
-      }
-      
-      .light-mode {
-        --bg-primary: linear-gradient(to bottom right, rgb(241, 245, 249), rgb(226, 232, 240), rgb(203, 213, 225));
-        --bg-nav: rgba(255, 255, 255, 0.8);
-        --bg-card: rgba(255, 255, 255, 0.9);
-        --border-color: rgba(0, 0, 0, 0.1);
-        --text-primary: rgb(15, 23, 42);
-        --text-secondary: rgb(51, 65, 85);
-        --text-muted: rgb(100, 116, 139);
-      }
-      
-      body {
-        background: var(--bg-primary);
-        color: var(--text-primary);
-        transition: background 0.3s ease, color 0.3s ease;
-      }
-      
-      .theme-card {
-        background: var(--bg-card);
-        border-color: var(--border-color);
-      }
-      
-      .theme-nav {
-        background: var(--bg-nav);
-        border-color: var(--border-color);
-      }
-      
-      .theme-text {
-        color: var(--text-primary);
-      }
-      
-      .theme-text-secondary {
-        color: var(--text-secondary);
-      }
-      
-      .theme-text-muted {
-        color: var(--text-muted);
-      }
-      
-      /* Toggle Switch Styles */
-      .theme-toggle {
-        position: relative;
-        width: 60px;
-        height: 30px;
-        background: rgba(100, 116, 139, 0.3);
-        border-radius: 30px;
-        cursor: pointer;
-        transition: background 0.3s;
-        border: 2px solid rgba(148, 163, 184, 0.2);
-      }
-      
-      .theme-toggle:hover {
-        background: rgba(100, 116, 139, 0.4);
-      }
-      
-      .theme-toggle-slider {
-        position: absolute;
-        top: 2px;
-        left: 2px;
-        width: 22px;
-        height: 22px;
-        background: white;
-        border-radius: 50%;
-        transition: transform 0.3s;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-      }
-      
-      .light-mode .theme-toggle-slider {
-        transform: translateX(30px);
-        background: #fbbf24;
-      }
-      
-      .theme-toggle-icon {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 14px;
-        transition: opacity 0.3s;
-      }
-      
-      .theme-toggle-icon.moon {
-        left: 6px;
-        opacity: 1;
-      }
-      
-      .theme-toggle-icon.sun {
-        right: 6px;
-        opacity: 0.3;
-      }
-      
-      .light-mode .theme-toggle-icon.moon {
-        opacity: 0.3;
-      }
-      
-      .light-mode .theme-toggle-icon.sun {
-        opacity: 1;
-      }
-      
-      /* Light mode overrides */
-      .light-mode .text-white {
-        color: rgb(15, 23, 42) !important;
-      }
-      
-      .light-mode .text-gray-200,
-      .light-mode .text-gray-300 {
-        color: rgb(30, 41, 59) !important;
-      }
-      
-      .light-mode .text-gray-400 {
-        color: rgb(71, 85, 105) !important;
-      }
-      
-      .light-mode .text-gray-500 {
-        color: rgb(100, 116, 139) !important;
-      }
-      
-      .light-mode .text-cyan-300,
-      .light-mode .text-cyan-400 {
-        color: rgb(14, 116, 144) !important;
-      }
-      
-      /* Light mode buttons */
-      .light-mode .bg-cyan-500\/20 {
-        background: rgba(6, 182, 212, 0.2) !important;
-      }
-    </style>
-  </head>
+      },
+    };
+  </script>
+  <style>
+    /* Theme Variables */
+    :root {
+      --bg-primary: linear-gradient(to bottom right, rgb(17, 24, 39), rgb(24, 24, 27), rgb(0, 0, 0));
+      --bg-nav: rgba(0, 0, 0, 0.4);
+      --bg-card: rgba(255, 255, 255, 0.05);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --text-primary: rgb(255, 255, 255);
+      --text-secondary: rgb(209, 213, 219);
+      --text-muted: rgb(156, 163, 175);
+    }
 
-  <body
-    class="min-h-screen transition-all duration-300"
-  >
-    <!-- Dark Glass Navbar -->
-    <nav class="fixed top-0 left-0 right-0 z-50">
-      <div class="max-w-7xl mx-auto px-6 py-5">
-        <div
-          class="backdrop-blur-xl theme-nav rounded-2xl shadow-2xl transition-all duration-300"
-          style="border: 1px solid var(--border-color)"
-        >
-          <div class="flex justify-between items-center px-8 py-5">
-            <!-- Logo - Now supports Khmer perfectly -->
-            <a
-              href="#"
-              class="text-4xl font-extrabold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent drop-shadow-lg font-khmer"
-            >
-              4\null Freelancer
-            </a>
+    .light-mode {
+      --bg-primary: linear-gradient(to bottom right, rgb(241, 245, 249), rgb(226, 232, 240), rgb(203, 213, 225));
+      --bg-nav: rgba(255, 255, 255, 0.8);
+      --bg-card: rgba(255, 255, 255, 0.9);
+      --border-color: rgba(0, 0, 0, 0.1);
+      --text-primary: rgb(15, 23, 42);
+      --text-secondary: rgb(51, 65, 85);
+      --text-muted: rgb(100, 116, 139);
+    }
 
-            <div class="flex items-center gap-6">
-              <div class="flex space-x-10 text-lg font-btb">
-                <a
-                  href="#"
-                  class="theme-text-secondary hover:text-cyan-400 transition hover:scale-110 font-ktr"
-                  >ទំព័រដើម</a
-                >
-                <a
-                  href="#"
-                  class="theme-text-secondary hover:text-cyan-400 transition hover:scale-110 font-ktr"
-                  >អំពីយើង</a
-                >
-                <a
-                  href="/blog/"
-                  class="theme-text-secondary hover:text-cyan-400 transition hover:scale-110 font-ktr"
-                  >ប្លក់</a
-                >
-                <a
-                  href="#"
-                  class="theme-text-secondary hover:text-cyan-400 transition hover:scale-110 font-ktr"
-                  >ទំនាក់ទំនង</a
-                >
-              </div>
-              
-              <!-- Theme Toggle -->
-              <button
-                id="themeToggle"
-                class="theme-toggle"
-                aria-label="Toggle theme"
-              >
-                <span class="theme-toggle-icon moon">🌙</span>
-                <span class="theme-toggle-icon sun">☀️</span>
-                <div class="theme-toggle-slider"></div>
-              </button>
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .theme-card {
+      background: var(--bg-card);
+      border-color: var(--border-color);
+    }
+
+    .theme-nav {
+      background: var(--bg-nav);
+      border-color: var(--border-color);
+    }
+
+    .theme-text {
+      color: var(--text-primary);
+    }
+
+    .theme-text-secondary {
+      color: var(--text-secondary);
+    }
+
+    .theme-text-muted {
+      color: var(--text-muted);
+    }
+
+    /* Toggle Switch Styles */
+    .theme-toggle {
+      position: relative;
+      width: 60px;
+      height: 30px;
+      background: rgba(100, 116, 139, 0.3);
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s;
+      border: 2px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .theme-toggle:hover {
+      background: rgba(100, 116, 139, 0.4);
+    }
+
+    .theme-toggle-slider {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 22px;
+      height: 22px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.3s;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .light-mode .theme-toggle-slider {
+      transform: translateX(30px);
+      background: #fbbf24;
+    }
+
+    .theme-toggle-icon {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      transition: opacity 0.3s;
+    }
+
+    .theme-toggle-icon.moon {
+      left: 6px;
+      opacity: 1;
+    }
+
+    .theme-toggle-icon.sun {
+      right: 6px;
+      opacity: 0.3;
+    }
+
+    .light-mode .theme-toggle-icon.moon {
+      opacity: 0.3;
+    }
+
+    .light-mode .theme-toggle-icon.sun {
+      opacity: 1;
+    }
+
+    /* Light mode overrides */
+    .light-mode .text-white {
+      color: rgb(15, 23, 42) !important;
+    }
+
+    .light-mode .text-gray-200,
+    .light-mode .text-gray-300 {
+      color: rgb(30, 41, 59) !important;
+    }
+
+    .light-mode .text-gray-400 {
+      color: rgb(71, 85, 105) !important;
+    }
+
+    .light-mode .text-gray-500 {
+      color: rgb(100, 116, 139) !important;
+    }
+
+    .light-mode .text-cyan-300,
+    .light-mode .text-cyan-400 {
+      color: rgb(14, 116, 144) !important;
+    }
+
+    /* Light mode buttons */
+    .light-mode .bg-cyan-500\/20 {
+      background: rgba(6, 182, 212, 0.2) !important;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen transition-all duration-300">
+  <!-- Dark Glass Navbar -->
+  <nav class="fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-5">
+      <div class="backdrop-blur-xl theme-nav rounded-2xl shadow-2xl transition-all duration-300 relative"
+        style="border: 1px solid var(--border-color)">
+        <div class="flex justify-between items-center px-6 py-4 md:px-8 md:py-5">
+          <!-- Logo - Now supports Khmer perfectly -->
+          <a href="#"
+            class="text-2xl md:text-4xl font-extrabold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent drop-shadow-lg font-khmer truncate max-w-[200px] md:max-w-none">
+            4\null Freelancer
+          </a>
+
+          <!-- Desktop Menu -->
+          <div class="hidden md:flex items-center gap-6">
+            <div class="flex space-x-8 text-lg font-btb">
+              <a href="#"
+                class="theme-text-secondary hover:text-cyan-400 transition hover:scale-110 font-ktr">ទំព័រដើម</a>
+              <a href="#"
+                class="theme-text-secondary hover:text-cyan-400 transition hover:scale-110 font-ktr">អំពីយើង</a>
+              <a href="/blog/"
+                class="theme-text-secondary hover:text-cyan-400 transition hover:scale-110 font-ktr">ប្លក់</a>
+              <a href="#"
+                class="theme-text-secondary hover:text-cyan-400 transition hover:scale-110 font-ktr">ទំនាក់ទំនង</a>
             </div>
 
-            <a
-              href="./blog/"
-              class="px-8 py-3 bg-cyan-500/20 border border-cyan-400/40 rounded-full text-cyan-300 font-bold hover:bg-cyan-500/30 hover:text-white transition font-ktr"
-            >
+            <!-- Theme Toggle -->
+            <button class="theme-toggle js-theme-toggle" aria-label="Toggle theme">
+              <span class="theme-toggle-icon moon">🌙</span>
+              <span class="theme-toggle-icon sun">☀️</span>
+              <div class="theme-toggle-slider"></div>
+            </button>
+
+            <a href="./blog/"
+              class="px-8 py-3 bg-cyan-500/20 border border-cyan-400/40 rounded-full text-cyan-300 font-bold hover:bg-cyan-500/30 hover:text-white transition font-ktr">
+              ចាប់ផ្តើមឥឡូវ
+            </a>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <div class="md:hidden flex items-center gap-4">
+            <!-- Theme Toggle Mobile -->
+            <button class="theme-toggle js-theme-toggle" aria-label="Toggle theme" style="transform: scale(0.8);">
+              <span class="theme-toggle-icon moon">🌙</span>
+              <span class="theme-toggle-icon sun">☀️</span>
+              <div class="theme-toggle-slider"></div>
+            </button>
+
+            <button id="mobile-menu-btn" class="text-cyan-400 focus:outline-none p-2">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-6 pt-2 border-t border-gray-700/50">
+          <div class="flex flex-col space-y-4 font-btb mt-4 text-center">
+            <a href="#" class="theme-text-secondary hover:text-cyan-400 transition font-ktr py-2 block">ទំព័រដើម</a>
+            <a href="#" class="theme-text-secondary hover:text-cyan-400 transition font-ktr py-2 block">អំពីយើង</a>
+            <a href="/blog/" class="theme-text-secondary hover:text-cyan-400 transition font-ktr py-2 block">ប្លក់</a>
+            <a href="#" class="theme-text-secondary hover:text-cyan-400 transition font-ktr py-2 block">ទំនាក់ទំនង</a>
+            <a href="./blog/"
+              class="inline-block px-8 py-3 bg-cyan-500/20 border border-cyan-400/40 rounded-full text-cyan-300 font-bold hover:bg-cyan-500/30 hover:text-white transition font-ktr mt-2">
               ចាប់ផ្តើមឥឡូវ
             </a>
           </div>
         </div>
       </div>
-    </nav>
+    </div>
+  </nav>
 
-    <!-- Hero Section -->
-    <section class="mt-12 flex items-center justify-center px-6 pt-20">
-      <div class="text-center max-w-5xl">
-        <p class="text-cyan-400 text-lg mb-4 font-ktr tracking-widest">
-          សួស្តី! We're 4\null
-        </p>
+  <!-- Hero Section -->
+  <section class="mt-12 flex items-center justify-center px-6 pt-20">
+    <div class="text-center max-w-5xl">
+      <p class="text-cyan-400 text-lg mb-4 font-ktr tracking-widest">
+        សួស្តី! We're 4\null
+      </p>
 
-        <h1
-          class="text-5xl md:text-7xl font-extrabold leading-tight font-btb theme-text"
-        >
-          ពួកយើងជា <br />
-          <span class="text-cyan-400">Full Stack Developer</span><br />
-          This is our <span class="text-cyan-400">Portfolio</span>
-        </h1>
+      <h1 class="text-5xl md:text-7xl font-extrabold leading-tight font-btb theme-text">
+        ពួកយើងជា <br />
+        <span class="text-cyan-400">Full Stack Developer</span><br />
+        This is our <span class="text-cyan-400">Portfolio</span>
+      </h1>
 
-        <!-- Avatar (replace with your image URL) -->
-        <div class="mt-12 flex justify-center">
-          <img
-            src="{% static 'main/logo.jpg' %}"
-            alt="Avatar"
-            class="w-64 h-64 rounded-full border-4 border-cyan-500/30 shadow-2xl"
-          />
-        </div>
-
-        <!-- Buttons -->
-        <div class="mt-12 flex flex-col sm:flex-row gap-6 justify-center">
-          <a
-            href="#"
-            class="px-8 py-4 bg-cyan-500/20 border border-cyan-400/50 rounded-full hover:bg-cyan-500/30 transition font-ktr font-bold"
-          >
-            ទាញយក CV
-          </a>
-          <a
-            href="#"
-            class="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-full hover:bg-white/20 transition font-ktr font-bold"
-          >
-            បន្ថែមអំពីពួកយើង
-          </a>
-        </div>
+      <!-- Avatar (replace with your image URL) -->
+      <div class="mt-12 flex justify-center">
+        <img src="{% static 'main/logo.jpg' %}" alt="Avatar"
+          class="w-64 h-64 rounded-full border-4 border-cyan-500/30 shadow-2xl" />
       </div>
-    </section>
+
+      <!-- Buttons -->
+      <div class="mt-12 flex flex-col sm:flex-row gap-6 justify-center">
+        <a href="#"
+          class="px-8 py-4 bg-cyan-500/20 border border-cyan-400/50 rounded-full hover:bg-cyan-500/30 transition font-ktr font-bold">
+          ទាញយក CV
+        </a>
+        <a href="#"
+          class="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-full hover:bg-white/20 transition font-ktr font-bold">
+          បន្ថែមអំពីពួកយើង
+        </a>
+      </div>
+    </div>
+  </section>
 
 
-    <section class="py-20 px-6">
+  <section class="py-20 px-6">
     <div class="max-w-7xl mx-auto">
       <h2 class="text-4xl font-bold text-center mb-16 font-battambang theme-text font-btb">
         អត្ថបទថ្មីៗរបស់ពួកយើង
       </h2>
 
       {% if posts%}
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
         <!-- Repeat this card for each project -->
         {% for post in posts|slice:":3" %}
-            <article class="group theme-card backdrop-blur-xl rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-3 shadow-xl hover:border-cyan-500/50" style="border: 1px solid var(--border-color)">
-              <a href="{% url 'blog_detail' post.slug %}">
-                
-                <!-- Featured Image -->
-                {% if post.featured_image %}
-                  <div class="overflow-hidden">
-                    <img src="{{ post.featured_image.url }}" 
-                         alt="{{ post.title }}" 
-                         class="w-full h-64 object-cover group-hover:scale-110 transition duration-700" />
-                  </div>
-                {% else %}
-                  <div class="bg-gradient-to-br from-cyan-900/50 to-blue-900/50 h-64 flex items-center justify-center">
-                    <span class="text-6xl opacity-30">Article</span>
-                  </div>
-                {% endif %}
+        <article
+          class="group theme-card backdrop-blur-xl rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-3 shadow-xl hover:border-cyan-500/50"
+          style="border: 1px solid var(--border-color)">
+          <a href="{% url 'blog_detail' post.slug %}">
 
-                <!-- Content -->
-                <div class="p-8">
-                  <h2 class="text-2xl md:text-3xl font-bold font-battambang theme-text group-hover:text-cyan-400 transition line-clamp-2">
-                    {{ post.title }}
-                  </h2>
+            <!-- Featured Image -->
+            {% if post.featured_image %}
+            <div class="overflow-hidden">
+              <img src="{{ post.featured_image.url }}" alt="{{ post.title }}"
+                class="w-full h-64 object-cover group-hover:scale-110 transition duration-700" />
+            </div>
+            {% else %}
+            <div class="bg-gradient-to-br from-cyan-900/50 to-blue-900/50 h-64 flex items-center justify-center">
+              <span class="text-6xl opacity-30">Article</span>
+            </div>
+            {% endif %}
 
-                  <div class="flex items-center gap-4 mt-4 text-sm theme-text-muted font-kantumruy">
-                    <span>{{ post.author.get_full_name|default:"4\null" }}</span>
-                    <span>•</span>
-                    <span>{{ post.date_created|date:"d/m/Y" }}</span>
-                  </div>
+            <!-- Content -->
+            <div class="p-8">
+              <h2
+                class="text-2xl md:text-3xl font-bold font-battambang theme-text group-hover:text-cyan-400 transition line-clamp-2">
+                {{ post.title }}
+              </h2>
 
-                  <p class="mt-5 theme-text-secondary font-kantumruy line-clamp-3 leading-relaxed">
-                    {{ post.content|striptags|truncatewords:35 }}
-                  </p>
+              <div class="flex items-center gap-4 mt-4 text-sm theme-text-muted font-kantumruy">
+                <span>{{ post.author.get_full_name|default:"4\null" }}</span>
+                <span>•</span>
+                <span>{{ post.date_created|date:"d/m/Y" }}</span>
+              </div>
 
-                  <div class="mt-6 flex items-center text-cyan-400 font-bold font-kantumruy group-hover:translate-x-2 transition">
-                    អានបន្ត <span class="ml-2">→</span>
-                  </div>
-                </div>
-              </a>
-            </article>
+              <p class="mt-5 theme-text-secondary font-kantumruy line-clamp-3 leading-relaxed">
+                {{ post.content|striptags|truncatewords:35 }}
+              </p>
+
+              <div
+                class="mt-6 flex items-center text-cyan-400 font-bold font-kantumruy group-hover:translate-x-2 transition">
+                អានបន្ត <span class="ml-2">→</span>
+              </div>
+            </div>
+          </a>
+        </article>
         {% endfor %}
-      {% endif %}
-    </div>
+        {% endif %}
+      </div>
   </section>
 
   <div class="flex justify-center mb-20 ">
-    <button type="button" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center leading-5 font-btb hover:brightness-110 "><a href="/blog/">អត្ថបទទាំងអស់ →  </a></button>
+    <button type="button"
+      class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center leading-5 font-btb hover:brightness-110 "><a
+        href="/blog/">អត្ថបទទាំងអស់ → </a></button>
   </div>
 
-  <footer class="py-10 text-center theme-text-muted font-kantumruy text-sm border-t transition-colors duration-300" style="border-color: var(--border-color)">
-      © 2024 4\null Freelancer. រក្សាសិទ្ធិគ្រប់យ៉ាង។
-    </footer>
+  <footer class="py-10 text-center theme-text-muted font-kantumruy text-sm border-t transition-colors duration-300"
+    style="border-color: var(--border-color)">
+    © 2024 4\null Freelancer. រក្សាសិទ្ធិគ្រប់យ៉ាង។
+  </footer>
 
-    <!-- Theme Toggle Script -->
-    <script>
-      // Check for saved theme preference or default to dark
-      const currentTheme = localStorage.getItem('theme') || 'dark';
-      if (currentTheme === 'light') {
-        document.body.classList.add('light-mode');
-      }
-      
-      // Toggle theme
-      document.getElementById('themeToggle').addEventListener('click', function() {
+  <!-- Theme Toggle Script -->
+  <script>
+    // Check for saved theme preference or default to dark
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    if (currentTheme === 'light') {
+      document.body.classList.add('light-mode');
+    }
+
+    // Toggle theme
+    const themeToggles = document.querySelectorAll('.js-theme-toggle');
+
+    themeToggles.forEach(toggle => {
+      toggle.addEventListener('click', function () {
         document.body.classList.toggle('light-mode');
-        
-        // Save preference
         const theme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
         localStorage.setItem('theme', theme);
       });
-    </script>
-  </body>
+    });
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+  </script>
+</body>
+
 </html>

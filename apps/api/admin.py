@@ -11,6 +11,7 @@ class PostAdmin(admin.ModelAdmin):
     readonly_fields = ['date_created', 'date_updated']
     list_editable = ['is_public']
     ordering = ['-date_created']
+    list_per_page = 25  # Optimize pagination
     
     fieldsets = (
         ('Post Content', {
@@ -39,6 +40,8 @@ class CommentAdmin(admin.ModelAdmin):
     list_editable = ['is_approved']
     readonly_fields = ['date_created']
     ordering = ['-date_created']
+    list_select_related = ['post']  # Optimize N+1 queries when displaying post in list
+    list_per_page = 25  # Optimize pagination
     
     fieldsets = (
         ('Comment Info', {

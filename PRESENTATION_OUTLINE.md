@@ -1,84 +1,88 @@
-# Project Presentation: Blog CMS with Admin Extensions
+# Presentation Slides Script: Django Blog Project
 
-## 1. Project Overview
-
-**Objective:** Build a professional, full-featured Content Management System (CMS) for blogging with a focus on SEO, user engagement, and a highly customized administrative experience.
+**Structure Strategy**: We explain "Back to Front" (Foundation -> Database -> UI) as this follows the actual flow of data creation to presentation.
 
 ---
 
-## 2. Core Features (Teacher Requirements)
+## Slide 1: Introduction & Team Roles
+**Title**: Django Blog V3 - Group Assignment
+**Subtitle**: A Full-Stack Monolithic Architecture
 
-### ✅ Data Modeling
+**Speaker Notes**:
+"Welcome. We built a scalable blog application using Django. Here is how our team collaborated, broken down by our development layers:"
 
-- **Post Model**: Stores blog content, metadata, and SEO slugs.
-- **Comment Model**: Enables reader interaction with approval workflows.
-- **Category & Tags**: Implemented as flexible fields for content organization.
-
-### ✅ SEO & Content Creation
-
-- **Slug Auto-generation**: Slugs are automatically created from titles in the admin panel for SEO-friendly URLs (e.g., `/blog/my-first-post/`).
-- **CKEditor Integration**: A powerful Rich Text Editor (RTE) for writing content with support for images, formatting, and media uploads.
-
-### ✅ User Experience (Frontend)
-
-- **List View**: A clean, 3-column grid layout showing all public posts.
-- **Detail View**: Full post reading experience with a dedicated comment section.
-- **Comment System**: Readers can submit comments which are displayed instantly under posts.
-
-### ✅ Advanced Admin Customization
-
-- **Jazzmin Theme**: Modernized the default Django admin with a professional dashboard.
-- **Custom UI**: Injected custom CSS to fix layout issues and expand the CKEditor workspace.
-- **Admin Tools**:
-  - Searchable posts and comments.
-  - Filters by category, author, and date.
-  - Direct editing of "Public" status from the list view.
+**Visual**: 
+- **Reaksa**: Project Foundation (Configuration, Routing, Base Layouts)
+- **Phanha**: Backend API (Database Models, Business Logic)
+- **Sombath & Sophou**: Frontend (User Interface, Views, Templates)
 
 ---
 
-## 3. Bonus Features Implemented
+## Slide 2: Project Architecture
+**Title**: The "Back-to-Front" Architecture
+**Visual**: A diagram showing layers.
+`Database -> Models (API) -> Views (Blog) -> Templates (HTML)`
 
-### 🚀 Pagination
-
-- Implemented Django's `Paginator` to handle large volumes of posts.
-- Clean navigation buttons with support for maintaining search queries across pages.
-
-### 🚀 Post Search
-
-- Integrated a global search bar on the blog list page.
-- Users can search by **Title, Content, Category, Tags, or Author**.
-
-### 🚀 Featured Media
-
-- Support for **Featured Images** on every post to improve visual appeal.
-
-### 🚀 Modern UI/UX
-
-- **Dark/Light Mode**: Fully responsive theme toggle for better readability.
-- **Glassmorphism Design**: Modern UI using Tailwind CSS and backdrop blurs.
+**Speaker Notes**:
+"Our project is structured into two main applications to keep concerns separate:
+1. **`apps/api`**: Handles the raw data and logic.
+2. **`apps/blog`**: Handles what the user sees.
+Everything is glued together by the **`main`** configuration."
 
 ---
 
-## 4. Technical Stack
+## Slide 3: The Foundation (Reaksa)
+**Title**: `main/` - The Control Center
 
-- **Backend**: Django 5.2
-- **Database**: SQLite3
-- **Frontend**: Tailwind CSS, JavaScript (Theme Toggle)
-- **Editor**: django-ckeditor
-- **Admin UI**: django-jazzmin + Custom CSS
+**Key Files Explained**:
+- **`settings.py`**: Tells Django which apps to use (`apps.api`, `apps.blog`) and configures the database.
+- **`urls.py`**: The traffic controller. It tells the browser where to go.
+  - `/admin` -> Administration
+  - `/` -> Blog Pages
+- **`templates/base.html`**: The master layout. It includes the Navbar and Footer so we don't have to rewrite them on every page.
 
----
-
-## 5. User Stories (Validation)
-
-1. **Reader**: "I can browse the blog list, search for specific topics, and read detailed articles."
-2. **Admin**: "I can easily manage content through a beautiful dashboard, with a large editor for writing."
-3. **User**: "I can leave feedback on posts through the comment section."
+**Speaker Notes**:
+"Before any code could be written, Reaksa set up the environment. This ensures that when Phanha makes a model or Sombath makes a page, the system knows how to load them."
 
 ---
 
-## 6. Team Review Notes
+## Slide 4: The Backend (Phanha)
+**Title**: `apps/api/` - The Data Layer
 
-- **Code Structure**: Apps are separated into `api` (models/admin) and `blog` (frontend views).
-- **SEO**: All URLs use slugs instead of IDs.
-- **Performance**: Images are handled via `Pillow` and served through media roots.
+**Key Files Explained**:
+- **`models.py`**: The Blueprint.
+  - `class Post`: Defines Title, Content, Author.
+  - `class Comment`: Defines relationships (Foreign Key to Post).
+- **`admin.py`**: The Management Interface. We customized this so content creators can easily write blogs.
+
+**Speaker Notes**:
+"Phanha's role was to define *what* we are building. By creating the Models, he created the database structure that holds all our information."
+
+---
+
+## Slide 5: The Frontend (Sombath & Sophou)
+**Title**: `apps/blog/` - The User Interface
+
+**Key Files Explained**:
+- **`views.py`**: The Logic. 
+  - `def blog_list`: Fetches all public posts from Phanha's `Post` model.
+  - `def blog_detail`: Fetches a single post and its comments.
+- **`templates/blog/`**: The Visuals.
+  - `blog_list.html`: loops through posts to show cards.
+  - `blog_detail.html`: displays the full article.
+
+**Speaker Notes**:
+"Sombath and Sophou took the data provided by the backend and displayed it beautifully. They used Reaksa's `base.html` and filled it with Phanha's data."
+
+---
+
+## Slide 6: Putting it Together (Demo)
+**Title**: The User Journey
+**Visual**: Arrow flow
+1. User visits `www.blog.com` -> **Reaksa's `urls.py`** catches it.
+2. URL calls **Sombath's `views.py`**.
+3. View asks **Phanha's `models.py`** for data.
+4. Data is returned to the **Template** and sent to the User.
+
+**Speaker Notes**:
+"This seamless integration allows our team to work in parallel. While backend optimized the database, frontend polished the design."
