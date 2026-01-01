@@ -10,7 +10,7 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
     # Empty queryset required for DRF router to auto-generate basename
     # Actual queryset is defined in get_queryset() for optimization
-    queryset = Post.objects.none()
+    queryset = Post.objects.none()  
     
     def get_queryset(self):
         """Optimize queryset with prefetch_related for comments"""
